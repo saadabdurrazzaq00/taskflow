@@ -241,26 +241,6 @@
             padding-right: 36px;
             cursor: pointer;
         }
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 6px;
-            margin-bottom: 12px;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--accent);
-            cursor: pointer;
-        }
-        .checkbox-group label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            user-select: none;
-        }
         .btn-add {
             width: 100%;
             padding: 13px;
@@ -914,19 +894,9 @@
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
             }
 
-            window.toggleDescriptionDisabled = function() {
-                const checkbox = document.getElementById('notAvailableCheckbox');
-                const textarea = document.getElementById('taskDescInput');
-                textarea.disabled = checkbox.checked;
-                if (checkbox.checked) {
-                    textarea.value = '';
-                }
-            };
-
             window.addTask = function() {
                 const nameInput = document.getElementById('taskNameInput');
                 const descInput = document.getElementById('taskDescInput');
-                const notAvailable = document.getElementById('notAvailableCheckbox').checked;
                 const dateInput = document.getElementById('dateInput');
                 const priorityInput = document.getElementById('priorityInput');
 
@@ -937,7 +907,7 @@
                     return;
                 }
 
-                const description = notAvailable ? '' : descInput.value.trim();
+                const description = descInput.value.trim();
 
                 const task = {
                     id: Date.now(),
@@ -957,8 +927,6 @@
 
                 nameInput.value = '';
                 descInput.value = '';
-                document.getElementById('notAvailableCheckbox').checked = false;
-                descInput.disabled = false;
                 dateInput.value = '';
                 priorityInput.value = 'medium';
                 nameInput.focus();
